@@ -108,7 +108,7 @@ dockers:
   - goos: linux
   - goarch: amd64
   - image_templates:
-      - "dalefengs/{{.ProjectName}}:v{{ .Version }}-amd64"
+      - "dalefengs/workflows-demo:v{{ .Version }}-amd64"
     dockerfile: Dockerfile
     use: buildx
     build_flag_templates:
