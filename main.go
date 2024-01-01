@@ -10,5 +10,5 @@ func main() {
 		"hello": "world",
 	}
 	marshal, _ := jsoniter.Marshal(m)
-	fmt.Println(marshal)
+	fmt.Println(string(marshal))
 }
