@@ -141,7 +141,7 @@ dockers:
     goos: linux
     goarch: arm64
     goarm: "6"
-    goamd64: "v2"
+#    goamd64: "v2"
 
     image_templates:
       - "dalefengs/{{.ProjectName}}:latest"
