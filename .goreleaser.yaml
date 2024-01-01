@@ -74,10 +74,7 @@ archives:
       owner: root
     files:
       - README.md
-      - LICENSE.md
-      - completions/*
-      - manpages/*
-      -
+
 checksum:
   name_template: 'checksums.txt'
 snapshot:
