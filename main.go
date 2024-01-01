@@ -1,7 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	jsoniter "github.com/json-iterator/go"
+)
 
 func main() {
-	fmt.Println("hello")
+	m := map[string]string{
+		"hello": "world",
+	}
+	marshal, _ := jsoniter.Marshal(m)
+	fmt.Println(marshal)
 }
