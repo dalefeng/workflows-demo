@@ -104,13 +104,23 @@ docker_signs:
       - "${artifact}@${digest}"
       - --yes
 
+# .goreleaser.yaml
 dockers:
-  - image_templates:
+  # You can have multiple Docker images.
+  -
+    id: amd64
+    goos: linux
+    goarch: amd64
+    goarm: ""
+    goamd64: "v2"
+
+    image_templates:
       - "dalefengs/{{.ProjectName}}:latest"
       - "dalefengs/{{.ProjectName}}:{{ .Tag }}"
+
+    skip_push: false
     dockerfile: Dockerfile
-    use: buildx
-    goarch: amd64
+    use: docker
     build_flag_templates:
       - "--pull"
       - "--label=io.artifacthub.package.readme-url=https://raw.githubusercontent.com/goreleaser/goreleaser/main/README.md"
@@ -124,14 +134,22 @@ dockers:
       - "--label=org.opencontainers.image.version={{.Version}}"
       - "--label=org.opencontainers.image.source={{.GitURL}}"
       - "--platform=linux/amd64"
-#    extra_files:
-#      - scripts/entrypoint.sh
-  - image_templates:
+    push_flags:
+      - --tls-verify=false
+  -
+    id: arm64
+    goos: linux
+    goarch: arm64
+    goarm: "6"
+    goamd64: "v2"
+
+    image_templates:
       - "dalefengs/{{.ProjectName}}:latest"
       - "dalefengs/{{.ProjectName}}:{{ .Tag }}"
-    goarch: arm64
+
+    skip_push: false
     dockerfile: Dockerfile
-    use: buildx
+    use: docker
     build_flag_templates:
       - "--pull"
       - "--label=io.artifacthub.package.readme-url=https://raw.githubusercontent.com/goreleaser/goreleaser/main/README.md"
@@ -145,3 +163,5 @@ dockers:
       - "--label=org.opencontainers.image.version={{.Version}}"
       - "--label=org.opencontainers.image.source={{.GitURL}}"
       - "--platform=linux/arm64"
+    push_flags:
+      - --tls-verify=false
