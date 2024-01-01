@@ -7,7 +7,7 @@ import (
 
 func main() {
 	m := map[string]string{
-		"hello": "world121",
+		"hello": "world1211",
 	}
 	marshal, _ := jsoniter.Marshal(m)
 	fmt.Println(string(marshal))
