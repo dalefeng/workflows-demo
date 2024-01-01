@@ -105,6 +105,8 @@ docker_signs:
       - --yes
 
 dockers:
+  - goos: linux
+  - goarch: amd64
   - image_templates:
       - "dalefengs/{{.ProjectName}}:v{{ .Version }}-amd64"
     dockerfile: Dockerfile
