@@ -14,7 +14,7 @@ FROM alpine:latest
 LABEL MAINTAINER="dalefengs@gmail.com"
 
 
-COPY --from=builder /go/src/workflows /
+COPY --from=builder /go/src/workflows/workflows /
 
 WORKDIR /go/src/workflows
 ENTRYPOINT ["/workflows"]
