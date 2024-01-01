@@ -104,7 +104,6 @@ docker_signs:
       - "${artifact}@${digest}"
       - --yes
 
-
 dockers:
   - image_templates:
       - "dalefengs/{{.ProjectName}}:v{{ .Version }}-amd64"

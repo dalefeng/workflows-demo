@@ -1,20 +1,22 @@
-FROM golang:alpine as builder
+FROM golang AS builder
 
-WORKDIR /go/src/workflows
+WORKDIR /build
+
 COPY . .
 
-RUN go env -w GO111MODULE=on \
-    && go env -w GOPROXY=https://goproxy.cn,direct \
-    && go env \
-    && go mod tidy \
-    && go build -o workflows .
+ENV GO111MODULE=on \
+    CGO_ENABLED=1 \
+    GOOS=linux
 
-FROM alpine:latest
+RUN go build -ldflags "-s -w -X 'dalefengs/wf.Version=$(cat VERSION)' -extldflags '-static'" -o wf
 
-LABEL MAINTAINER="dalefengs@gmail.com"
+FROM alpine
 
+RUN apk update \
+    && apk upgrade \
+    && apk add --no-cache ca-certificates tzdata \
+    && update-ca-certificates 2>/dev/null || true
 
-COPY --from=builder /go/src/workflows/workflows /
-
-WORKDIR /go/src/workflows
-ENTRYPOINT ["/workflows"]
+COPY --from=builder /build/wf /
+WORKDIR /data
+ENTRYPOINT ["/wf"]
