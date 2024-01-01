@@ -23,16 +23,10 @@ jobs:
           repo-token: ${{ secrets.GH_TOKEN }}
       - uses: docker/setup-qemu-action@v2 # v2
       - uses: docker/setup-buildx-action@v2 # v2
-      - name: setup-snapcraft
-        run: |
-          sudo apt-get update
-          sudo apt-get -yq --no-install-suggests --no-install-recommends install snapcraft
-          mkdir -p $HOME/.cache/snapcraft/download
-          mkdir -p $HOME/.cache/snapcraft/stage-packages
       - uses: actions/setup-go@v4
         with:
           go-version: stable
-      - uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
+      - uses: actions/cache@v3 # v3
         with:
           path: |
             ./dist/*.deb
