@@ -14,8 +14,8 @@ FROM alpine:latest
 
 LABEL MAINTAINER="dalefengs@gmail.com"
 
-WORKDIR /go/src/chat-api-reverse
+WORKDIR /go/src/workflows-demo
 
 COPY --from=0 /go/src/workflows-demo ./
 
-ENTRYPOINT ./workflows-demo
+ENTRYPOINT ["./workflows-demo"]
