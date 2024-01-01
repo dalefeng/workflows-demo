@@ -107,15 +107,14 @@ docker_signs:
 
 dockers:
   - image_templates:
-      - "goreleaser/goreleaser:v{{ .Version }}-amd64"
-      - "ghcr.io/goreleaser/goreleaser:v{{ .Version }}-amd64"
+      - "dalefengs/{{.ProjectName}}:v{{ .Version }}-amd64"
     dockerfile: Dockerfile
     use: buildx
     build_flag_templates:
       - "--pull"
       - "--label=io.artifacthub.package.readme-url=https://raw.githubusercontent.com/goreleaser/goreleaser/main/README.md"
       - "--label=io.artifacthub.package.logo-url=https://goreleaser.com/static/avatar.png"
-      - '--label=io.artifacthub.package.maintainers=[{"name":"Carlos Alexandro Becker","email":"carlos@carlosbecker.dev"}]'
+      - '--label=io.artifacthub.package.maintainers=[{"name":"Carlos Alexandro Becker","email":"dalefengs@gmail.com"}]'
       - "--label=io.artifacthub.package.license=MIT"
       - "--label=org.opencontainers.image.description=Deliver Go binaries as fast and easily as possible"
       - "--label=org.opencontainers.image.created={{.Date}}"
