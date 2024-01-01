@@ -1,4 +1,4 @@
-name: Release Drafter
+name: Release
 
 on:
   push:
@@ -13,7 +13,7 @@ permissions:
   packages: write
 
 jobs:
-  goreleaser:
+  releaser:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
