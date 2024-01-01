@@ -13,7 +13,7 @@ permissions:
   packages: write
 
 jobs:
-  goreleaser:
+  releaser:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -53,8 +53,6 @@ jobs:
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      - name: goreleaser-release
-        run: task goreleaser
 
 
 #      - run: git fetch --force --tags

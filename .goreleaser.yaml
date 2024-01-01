@@ -105,17 +105,17 @@ docker_signs:
       - --yes
 
 dockers:
-  - goos: linux
-  - goarch: amd64
   - image_templates:
-      - "dalefengs/workflows-demo:v{{ .Version }}-amd64"
+      - "dalefengs/{{.ProjectName}}:latest"
+      - "dalefengs/{{.ProjectName}}:{{ .Tag }}"
     dockerfile: Dockerfile
     use: buildx
+    goarch: amd64
     build_flag_templates:
       - "--pull"
       - "--label=io.artifacthub.package.readme-url=https://raw.githubusercontent.com/goreleaser/goreleaser/main/README.md"
       - "--label=io.artifacthub.package.logo-url=https://goreleaser.com/static/avatar.png"
-      - '--label=io.artifacthub.package.maintainers=[{"name":"Carlos Alexandro Becker","email":"dalefengs@gmail.com"}]'
+      - '--label=io.artifacthub.package.maintainers=[{"name":"dalefengs","email":"dalefengs@gmail.com"}]'
       - "--label=io.artifacthub.package.license=MIT"
       - "--label=org.opencontainers.image.description=Deliver Go binaries as fast and easily as possible"
       - "--label=org.opencontainers.image.created={{.Date}}"
@@ -126,22 +126,22 @@ dockers:
       - "--platform=linux/amd64"
 #    extra_files:
 #      - scripts/entrypoint.sh
-#  - image_templates:
-#      - "goreleaser/goreleaser:v{{ .Version }}-arm64"
-#      - "ghcr.io/goreleaser/goreleaser:v{{ .Version }}-arm64"
-#    dockerfile: Dockerfile
-#    use: buildx
-#    build_flag_templates:
-#      - "--pull"
-#      - "--label=io.artifacthub.package.readme-url=https://raw.githubusercontent.com/goreleaser/goreleaser/main/README.md"
-#      - "--label=io.artifacthub.package.logo-url=https://goreleaser.com/static/avatar.png"
-#      - '--label=io.artifacthub.package.maintainers=[{"name":"Carlos Alexandro Becker","email":"carlos@carlosbecker.dev"}]'
-#      - "--label=io.artifacthub.package.license=MIT"
-#      - "--label=org.opencontainers.image.description=Deliver Go binaries as fast and easily as possible"
-#      - "--label=org.opencontainers.image.created={{.Date}}"
-#      - "--label=org.opencontainers.image.name={{.ProjectName}}"
-#      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-#      - "--label=org.opencontainers.image.version={{.Version}}"
-#      - "--label=org.opencontainers.image.source={{.GitURL}}"
-#      - "--platform=linux/arm64"
-#    goarch: arm64
+  - image_templates:
+      - "dalefengs/{{.ProjectName}}:latest"
+      - "dalefengs/{{.ProjectName}}:{{ .Tag }}"
+    goarch: arm64
+    dockerfile: Dockerfile
+    use: buildx
+    build_flag_templates:
+      - "--pull"
+      - "--label=io.artifacthub.package.readme-url=https://raw.githubusercontent.com/goreleaser/goreleaser/main/README.md"
+      - "--label=io.artifacthub.package.logo-url=https://goreleaser.com/static/avatar.png"
+      - '--label=io.artifacthub.package.maintainers=[{"name":"dalefengs","email":"dalefengs@gmail.com"}]'
+      - "--label=io.artifacthub.package.license=MIT"
+      - "--label=org.opencontainers.image.description=Deliver Go binaries as fast and easily as possible"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.name={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+      - "--label=org.opencontainers.image.source={{.GitURL}}"
+      - "--platform=linux/arm64"
