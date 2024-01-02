@@ -14,11 +14,11 @@ RUN go build -o server .
 
 FROM ubuntu:22.04
 
-WORKDIR /app
-
 LABEL MAINTAINER="dalefengs@gmail.com"
 
 RUN apt update
 
-COPY --from=builder /build/wf /app
-ENTRYPOINT ["/app/wf"]
+COPY --from=builder /build/server /app
+
+WORKDIR /app
+ENTRYPOINT ["/app/server"]
