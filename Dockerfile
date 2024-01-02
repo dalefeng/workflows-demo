@@ -1,11 +1,22 @@
-# 使用官方的 Python 运行时作为基础镜像
-FROM python:3.9
+FROM golang AS builder
 
-# 设置工作目录为 /app
-WORKDIR /app
+WORKDIR /build
 
-# 在工作目录下创建一个名为 app.py 的文件
-RUN echo "print('hello')" > app.py
+COPY . .
 
-# 定义容器启动时要执行的命令
-CMD ["python", "app.py"]
+ENV GO111MODULE=on \
+    GOPROXY=https://goproxy.cn,direct \
+    CGO_ENABLED=1 \
+    GOOS=linux
+
+RUN go build -ldflags "-s -w -X 'dalefengs/wf.Version=$(cat VERSION)' -extldflags '-static'" -o wf
+
+FROM alpine
+
+RUN apk update \
+    && apk upgrade \
+    && apk add --no-cache ca-certificates tzdata \
+    && update-ca-certificates 2>/dev/null || true
+
+COPY --from=builder /build/wf /
+ENTRYPOINT ["/wf"]
