@@ -18,7 +18,7 @@ LABEL MAINTAINER="dalefengs@gmail.com"
 
 RUN apt update
 
+WORKDIR /app
 COPY --from=builder /build/server /app
 
-WORKDIR /app
 ENTRYPOINT ["/app/server"]
