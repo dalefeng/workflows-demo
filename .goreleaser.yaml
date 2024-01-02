@@ -133,35 +133,35 @@ dockers:
       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
       - "--label=org.opencontainers.image.version={{.Version}}"
       - "--label=org.opencontainers.image.source={{.GitURL}}"
-      - "--platform=linux/amd64"
+      - "--platform=linux/amd64,linux/amd64"
     push_flags:
       - --tls-verify=false
-  -
-    id: arm64
-    goos: linux
-    goarch: arm64
-    goarm: "6"
-#    goamd64: "v2"
+#   -
+#     id: arm64
+#     goos: linux
+#     goarch: arm64
+#     goarm: "6"
+# #    goamd64: "v2"
 
-    image_templates:
-      - "dalefengs/{{.ProjectName}}:latest"
-      - "dalefengs/{{.ProjectName}}:{{ .Tag }}"
+#     image_templates:
+#       - "dalefengs/{{.ProjectName}}:latest"
+#       - "dalefengs/{{.ProjectName}}:{{ .Tag }}"
 
-    skip_push: false
-    dockerfile: Dockerfile
-    use: buildx
-    build_flag_templates:
-      - "--pull"
-      - "--label=io.artifacthub.package.readme-url=https://raw.githubusercontent.com/goreleaser/goreleaser/main/README.md"
-      - "--label=io.artifacthub.package.logo-url=https://goreleaser.com/static/avatar.png"
-      - '--label=io.artifacthub.package.maintainers=[{"name":"dalefengs","email":"dalefengs@gmail.com"}]'
-      - "--label=io.artifacthub.package.license=MIT"
-      - "--label=org.opencontainers.image.description=Deliver Go binaries as fast and easily as possible"
-      - "--label=org.opencontainers.image.created={{.Date}}"
-      - "--label=org.opencontainers.image.name={{.ProjectName}}"
-      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-      - "--label=org.opencontainers.image.version={{.Version}}"
-      - "--label=org.opencontainers.image.source={{.GitURL}}"
-      - "--platform=linux/arm64"
-    push_flags:
-      - --tls-verify=false
+#     skip_push: false
+#     dockerfile: Dockerfile
+#     use: buildx
+#     build_flag_templates:
+#       - "--pull"
+#       - "--label=io.artifacthub.package.readme-url=https://raw.githubusercontent.com/goreleaser/goreleaser/main/README.md"
+#       - "--label=io.artifacthub.package.logo-url=https://goreleaser.com/static/avatar.png"
+#       - '--label=io.artifacthub.package.maintainers=[{"name":"dalefengs","email":"dalefengs@gmail.com"}]'
+#       - "--label=io.artifacthub.package.license=MIT"
+#       - "--label=org.opencontainers.image.description=Deliver Go binaries as fast and easily as possible"
+#       - "--label=org.opencontainers.image.created={{.Date}}"
+#       - "--label=org.opencontainers.image.name={{.ProjectName}}"
+#       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+#       - "--label=org.opencontainers.image.version={{.Version}}"
+#       - "--label=org.opencontainers.image.source={{.GitURL}}"
+#       - "--platform=linux/arm64"
+#     push_flags:
+#       - --tls-verify=false
