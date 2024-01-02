@@ -1,45 +1,26 @@
-name: Release
+name: Release Drafter
 
 on:
   push:
     branches:
       - main
   pull_request:
-    types: [opened, reopened, synchronize]
+    types: [ opened, reopened, synchronize ]
 
 permissions:
-  contents: write
-  id-token: write
-  packages: write
+  contents: read
 
 jobs:
-  releaser:
+  goreleaser:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: arduino/setup-task@v1
-        with:
-          version: 3.x
-          repo-token: ${{ secrets.GH_TOKEN }}
-      - uses: docker/setup-qemu-action@v2
-      - uses: docker/setup-buildx-action@v2
-      - uses: actions/setup-go@v4
+      - run: git fetch --force --tags
+      - uses: actions/setup-go@v3
         with:
           go-version: stable
-      - uses: actions/cache@v3
-        with:
-          path: |
-            ./dist/*.deb
-            ./dist/*.rpm
-            ./dist/*.apk
-          key: ${{ github.ref }}
-      - uses: sigstore/cosign-installer@v3.3.0
-      - uses: anchore/sbom-action/download-syft@v0.15.1
-      - uses: crazy-max/ghaction-upx@v3
-        with:
-          install-only: true
       - uses: goreleaser/goreleaser-action@v5
         with:
           distribution: goreleaser

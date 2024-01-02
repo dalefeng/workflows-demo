@@ -5,18 +5,20 @@ WORKDIR /build
 COPY . .
 
 ENV GO111MODULE=on \
+    CGO_ENABLED=0 \
     GOPROXY=https://goproxy.cn,direct \
     CGO_ENABLED=1 \
     GOOS=linux
 
-RUN go build -ldflags "-s -w -X 'dalefengs/wf.Version=$(cat VERSION)' -extldflags '-static'" -o wf
+RUN go build -o server .
 
-FROM alpine
+FROM ubuntu:22.04
 
-RUN apk update \
-    && apk upgrade \
-    && apk add --no-cache ca-certificates tzdata \
-    && update-ca-certificates 2>/dev/null || true
+WORKDIR /app
 
-COPY --from=builder /build/wf /
-ENTRYPOINT ["/wf"]
+LABEL MAINTAINER="dalefengs@gmail.com"
+
+RUN apt update
+
+COPY --from=builder /build/wf /app
+ENTRYPOINT ["/app/wf"]
