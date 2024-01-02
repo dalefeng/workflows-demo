@@ -8,7 +8,7 @@ import (
 
 func main() {
 	m := map[string]string{
-		"hello": "world",
+		"hello": "world1",
 	}
 	baseURL := os.Getenv("BASE_URL")
 	fmt.Println("BASE_URL:", baseURL)
