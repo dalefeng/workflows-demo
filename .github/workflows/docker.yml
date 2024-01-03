@@ -1,5 +1,8 @@
 name: Publish Docker image
 
+env:
+  TZ: Asia/Shanghai
+
 on:
   workflow_dispatch: # 当有 release 发布时触发
   release:

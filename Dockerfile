@@ -16,7 +16,9 @@ FROM ubuntu:22.04
 
 LABEL MAINTAINER="dalefengs@gmail.com"
 
-RUN apt update
+RUN apt-get update
+RUN apt-get install -y ca-certificates
+
 
 WORKDIR /app
 COPY --from=builder /build/server /app

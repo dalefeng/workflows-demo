@@ -1,5 +1,8 @@
 name: Release Drafter
 
+env:
+  TZ: Asia/Shanghai
+
 on:
   push:
     tags:
