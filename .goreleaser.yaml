@@ -59,9 +59,12 @@ changelog:
     - title: "Security updates" # 安全更新： 例如，添加安全头、更新 .gitignore、更新 .gitattributes 等
       regexp: '^.*?sec(\([[:word:]]+\))??!?:.+$'
       order: 150
-    - title: "Bug fixes" # 修复错误： 例如，修复 bug、修复拼写错误等
+    - title: ":bug: Bug fixes" # 修复错误： 例如，修复 bug、修复拼写错误等
       regexp: '^.*?fix(\([[:word:]]+\))??!?:.+$'
       order: 200
+    - title: "Perf" # 优化相关，比如提升性能、体验。
+      regexp: '^.*?perf(\([[:word:]]+\))??!?:.+$'
+      order: 300
     - title: "Chore" # 杂务：通常用于描述其他不属于新功能、修复错误或重构代码的提交。 例如，更新文档、清理代码、更新依赖项、删除文件等
       regexp: '^.*?chore(\([[:word:]]+\))??!?:.+$'
       order: 300
