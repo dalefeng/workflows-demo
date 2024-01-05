@@ -51,7 +51,7 @@ changelog:
       regexp: '^.*?(feat|fix)\(deps\)!?:.+$'
       order: 300
     - title: ":sparkles: Features" # 新功能： 例如，新功能、新页面、新组件等
-      regexp: '^.*?feat(\([[:word:]]+\))??!?:.+$'
+      regexp: '^.*?(feat|sparkles)(\([[:word:]]+\))??!?:.+$'
       order: 100
     - title: ":art: Refactor" # 重构： 例如，重构代码、格式化代码、移动文件等
       regexp: '^.*?refactor(\([[:word:]]+\))??!?:.+$'
